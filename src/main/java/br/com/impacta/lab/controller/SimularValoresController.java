@@ -44,7 +44,33 @@ public class SimularValoresController {
 		 */
 		
 		
-		return ResponseEntity.ok("Hello world !");
+		return ResponseEntity.ok(getDescricaoProduto(codigoProduto) + " custará " + valorFuturo(ano, codigoProduto) 
+									+ " reais em " + ano);
+	}
+
+	private Double valorFuturo(Integer ano, Integer codigoProduto){
+		double result = getValorProduto(codigoProduto);
+		for (int i = 2021; i < ano; i++){
+			result = result * 1.05;
+		}
+		return Math.round(result * 100.0) /100.0;
+	}
+
+	private String getDescricaoProduto(Integer codigoProduto){
+		if (codigoProduto == 1) return "Camisa";
+		if (codigoProduto == 2) return "Shorts";
+		if (codigoProduto == 3) return "Meia";	
+		if (codigoProduto == 4) return "Toca";
+		if (codigoProduto == 5) return "Luvas";
+		return "###";
+	}
+	private Double getValorProduto(Integer codigoProduto){
+		if (codigoProduto == 1) return 70.00;
+		if (codigoProduto == 2) return 57.50;
+		if (codigoProduto == 3) return 9.99;	
+		if (codigoProduto == 4) return 35.00;
+		if (codigoProduto == 5) return 19.50;
+		return 0.00;
 	}
 	
 }
